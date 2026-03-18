@@ -1,1 +1,836 @@
+:root {
+  --bg: #06131e;
+  --bg-soft: #0d2233;
+  --panel: rgba(10, 28, 42, 0.78);
+  --panel-strong: rgba(10, 28, 42, 0.94);
+  --line: rgba(155, 223, 255, 0.16);
+  --text: #eff9ff;
+  --muted: #a8c0d0;
+  --accent: #72f2c3;
+  --accent-strong: #ffb85c;
+  --accent-hot: #ff6f61;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  --radius: 28px;
+  --cricket-progress: 0;
+  --badminton-progress: 0;
+  --power-progress: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Instrument Sans", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(114, 242, 195, 0.18), transparent 32%),
+    radial-gradient(circle at 80% 10%, rgba(255, 184, 92, 0.18), transparent 28%),
+    linear-gradient(145deg, #05101a 0%, #071a2a 35%, #0a2133 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-shell {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.site-header {
+  position: sticky;
+  top: 12px;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(5, 16, 26, 0.72);
+  backdrop-filter: blur(16px);
+}
+
+.brand,
+.site-nav a,
+.button,
+.contact-links a {
+  transition: transform 180ms ease, color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.brand {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.site-nav {
+  display: flex;
+  gap: 20px;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
+.site-nav a:hover,
+.contact-links a:hover {
+  color: var(--text);
+}
+
+.section {
+  padding: 88px 0;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Syne", sans-serif;
+  line-height: 0.96;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(3.6rem, 8vw, 6.6rem);
+  max-width: 8ch;
+}
+
+h2 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  max-width: 12ch;
+}
+
+h3 {
+  font-size: 1.55rem;
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.hero-lead,
+.section-copy {
+  font-size: 1.1rem;
+  max-width: 60ch;
+}
+
+.hero-actions,
+.contact-links {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 30px 0 24px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button-primary {
+  background: linear-gradient(135deg, var(--accent), #78b8ff);
+  color: #082336;
+}
+
+.button-secondary {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hero-meta,
+.stat-list,
+.timeline-mini,
+.experience-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hero-meta li {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hero-visual {
+  position: relative;
+}
+
+.hero-orbit {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  min-height: 420px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.07), transparent 58%),
+    radial-gradient(circle at center, rgba(114, 242, 195, 0.14), transparent 68%);
+  overflow: hidden;
+}
+
+.hero-orbit::before,
+.hero-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 15%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.hero-orbit::after {
+  inset: 32%;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(3px);
+  animation: drift 10s ease-in-out infinite;
+}
+
+.orb-a {
+  top: 16%;
+  left: 18%;
+  width: 84px;
+  height: 84px;
+  background: rgba(114, 242, 195, 0.8);
+}
+
+.orb-b {
+  right: 12%;
+  top: 24%;
+  width: 56px;
+  height: 56px;
+  background: rgba(120, 184, 255, 0.78);
+  animation-delay: -2.4s;
+}
+
+.orb-c {
+  bottom: 18%;
+  left: 26%;
+  width: 72px;
+  height: 72px;
+  background: rgba(255, 184, 92, 0.72);
+  animation-delay: -5.3s;
+}
+
+.signal-card {
+  position: absolute;
+  width: min(260px, 62%);
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  background: rgba(6, 19, 30, 0.74);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+}
+
+.signal-card span,
+.stage-label {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+}
+
+.signal-card strong {
+  display: block;
+  font-size: 1.35rem;
+  margin: 8px 0 6px;
+}
+
+.signal-card p,
+.stage-copy p {
+  margin: 0;
+}
+
+.signal-card-main {
+  right: 5%;
+  bottom: 14%;
+}
+
+.signal-card-side {
+  left: 8%;
+  top: 12%;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 0.8fr;
+  gap: 20px;
+}
+
+.panel,
+.experience-card,
+.project-card,
+.contact-section {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}
+
+.panel-large {
+  min-height: 100%;
+}
+
+.stat-list,
+.timeline-mini {
+  display: grid;
+  gap: 16px;
+}
+
+.stat-list li,
+.timeline-mini li {
+  display: grid;
+  gap: 6px;
+}
+
+.stat-list span,
+.timeline-mini span,
+.experience-head p {
+  color: var(--muted);
+}
+
+.section-heading {
+  margin-bottom: 30px;
+}
+
+.experience-list,
+.project-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.experience-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.project-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.experience-head {
+  margin-bottom: 18px;
+}
+
+.experience-card ul {
+  display: grid;
+  gap: 12px;
+}
+
+.experience-card li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.experience-card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+}
+
+.project-card {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hobbies-section {
+  position: relative;
+}
+
+.hobby-experience {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+  gap: 24px;
+  align-items: start;
+}
+
+.hobby-stage {
+  position: sticky;
+  top: 110px;
+  min-height: 72vh;
+  overflow: hidden;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 36px;
+  background: rgba(4, 14, 22, 0.8);
+  box-shadow: var(--shadow);
+}
+
+.stage-backdrop,
+.sport-visual {
+  position: absolute;
+  inset: 0;
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.stage-backdrop {
+  opacity: 0;
+}
+
+.stage-backdrop-cricket {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(114, 242, 195, 0.16), transparent 36%),
+    linear-gradient(180deg, rgba(114, 242, 195, 0.08), transparent 70%);
+}
+
+.stage-backdrop-badminton {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(120, 184, 255, 0.22), transparent 34%),
+    linear-gradient(135deg, rgba(120, 184, 255, 0.08), transparent 70%);
+}
+
+.stage-backdrop-power {
+  background:
+    radial-gradient(circle at 50% 58%, rgba(255, 111, 97, 0.18), transparent 30%),
+    linear-gradient(180deg, rgba(255, 184, 92, 0.08), transparent 80%);
+}
+
+.sport-visual {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.hobby-stage[data-active="cricket"] .stage-backdrop-cricket,
+.hobby-stage[data-active="cricket"] .sport-cricket,
+.hobby-stage[data-active="badminton"] .stage-backdrop-badminton,
+.hobby-stage[data-active="badminton"] .sport-badminton,
+.hobby-stage[data-active="power"] .stage-backdrop-power,
+.hobby-stage[data-active="power"] .sport-power {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.stage-copy {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 28px;
+  z-index: 3;
+  padding: 24px;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(4, 14, 22, 0.62);
+  backdrop-filter: blur(10px);
+}
+
+.stage-copy h3 {
+  margin: 12px 0 10px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.cricket-pitch {
+  position: absolute;
+  left: 50%;
+  top: 22%;
+  width: min(72%, 360px);
+  height: 48%;
+  transform: translateX(-50%);
+  border-radius: 180px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), transparent),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 35%, transparent 65%, rgba(255, 255, 255, 0.08));
+}
+
+.cricket-rings {
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  border: 1px dashed rgba(114, 242, 195, 0.28);
+}
+
+.cricket-ball {
+  position: absolute;
+  top: calc(68% - (var(--cricket-progress) * 190px));
+  left: calc(18% + (var(--cricket-progress) * 54%));
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff5f1, #ff725c 45%, #c32522 100%);
+  box-shadow: 0 0 0 10px rgba(255, 111, 97, 0.12);
+}
+
+.cricket-bat {
+  position: absolute;
+  right: 19%;
+  bottom: 24%;
+  width: 28px;
+  height: 180px;
+  transform-origin: 50% 90%;
+  transform: rotate(calc(-18deg + (var(--cricket-progress) * 48deg)));
+  border-radius: 18px;
+  background: linear-gradient(180deg, #f6dda6 0%, #c79e63 90%);
+  box-shadow: inset 0 -16px 0 rgba(87, 47, 17, 0.18);
+}
+
+.cricket-bat::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -28px;
+  width: 10px;
+  height: 36px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #3e1d0d;
+}
+
+.court-lines {
+  position: absolute;
+  inset: 12% 14%;
+  border-radius: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+}
+
+.court-lines::before,
+.court-lines::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.court-lines::before {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+}
+
+.court-lines::after {
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+}
+
+.shuttle {
+  position: absolute;
+  left: calc(20% + (var(--badminton-progress) * 58%));
+  top: 30%;
+  width: 42px;
+  height: 24px;
+  transform: translateY(calc((0.5 - var(--badminton-progress)) * 160px)) rotate(calc(-25deg + (var(--badminton-progress) * 50deg)));
+  border-radius: 10px 18px 18px 10px;
+  background: linear-gradient(90deg, #d8f3ff, #ffffff);
+  box-shadow: 0 0 0 10px rgba(120, 184, 255, 0.1);
+}
+
+.shuttle::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: -10px;
+  width: 24px;
+  height: 44px;
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+  background: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.18));
+}
+
+.racket {
+  position: absolute;
+  width: 130px;
+  height: 170px;
+  border: 6px solid rgba(255, 255, 255, 0.68);
+  border-radius: 50% 50% 46% 46%;
+}
+
+.racket::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -48px;
+  width: 14px;
+  height: 62px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #7e6bf4, #5638c0);
+}
+
+.racket-left {
+  left: 12%;
+  bottom: 22%;
+  transform: rotate(calc(-36deg + (var(--badminton-progress) * 18deg)));
+}
+
+.racket-right {
+  right: 12%;
+  top: 18%;
+  transform: rotate(calc(28deg - (var(--badminton-progress) * 22deg)));
+}
+
+.smash-trail {
+  position: absolute;
+  left: 22%;
+  right: 20%;
+  top: calc(46% - (var(--badminton-progress) * 80px));
+  height: 2px;
+  opacity: calc(0.2 + (var(--badminton-progress) * 0.8));
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent);
+  transform: rotate(-18deg);
+}
+
+.power-platform {
+  position: absolute;
+  left: 50%;
+  bottom: 19%;
+  width: 62%;
+  height: 18px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.08));
+}
+
+.barbell {
+  position: absolute;
+  left: 50%;
+  bottom: calc(19% + (var(--power-progress) * 160px));
+  width: min(72%, 380px);
+  height: 120px;
+  transform: translateX(-50%);
+}
+
+.bar {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 50%;
+  height: 12px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e7f8ff, #8dd1ef, #e7f8ff);
+}
+
+.plate {
+  position: absolute;
+  top: 12px;
+  width: 64px;
+  height: 96px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffb85c, #eb5d4d);
+  box-shadow: 0 0 0 12px rgba(255, 111, 97, 0.1);
+}
+
+.plate-left {
+  left: 0;
+}
+
+.plate-right {
+  right: 0;
+}
+
+.power-aura {
+  position: absolute;
+  inset: 18% 24%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(255, 111, 97, calc(0.08 + (var(--power-progress) * 0.18))), transparent 64%);
+}
+
+.hobby-panels {
+  display: grid;
+  gap: 18px;
+}
+
+.hobby-panel {
+  min-height: 62vh;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: var(--panel-strong);
+}
+
+.panel-index {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+
+.contact-section h2 {
+  max-width: 11ch;
+}
+
+.contact-links a {
+  padding: 14px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@media (max-width: 1040px) {
+  .hero,
+  .intro-grid,
+  .hobby-experience,
+  .experience-list,
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 48px;
+  }
+
+  .hero-orbit {
+    min-height: 360px;
+  }
+
+  .project-card {
+    min-height: 200px;
+  }
+
+  .hobby-stage {
+    position: relative;
+    top: 0;
+    min-height: 60vh;
+  }
+
+  .hobby-panel {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .page-shell {
+    width: min(100% - 24px, 1200px);
+  }
+
+  .site-header {
+    gap: 12px;
+    border-radius: 28px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .site-nav {
+    flex-wrap: wrap;
+    gap: 12px 16px;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  .panel,
+  .experience-card,
+  .project-card,
+  .contact-section,
+  .hobby-panel,
+  .hobby-stage {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .signal-card {
+    width: auto;
+  }
+
+  .signal-card-side {
+    left: 18px;
+    right: 90px;
+    top: 18px;
+  }
+
+  .signal-card-main {
+    left: 90px;
+    right: 18px;
+    bottom: 18px;
+  }
+
+  .stage-copy {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    padding: 18px;
+  }
+}
 
